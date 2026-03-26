@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio | Alexander Valer</title>
+
+  <style>
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,Arial; background:linear-gradient(180deg,#0a0a0a,#111); color:#eaeaea; }
+    header { position:sticky; top:0; backdrop-filter:blur(12px); background:rgba(20,20,20,0.6); padding:15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1f1f1f; z-index:10; }
+    .menu { font-size:22px; cursor:pointer; }
+
+    .sidebar { position:fixed; top:0; left:-260px; width:260px; height:100%; background:#0d0d0d; padding:30px 20px; transition:0.35s; z-index:999; box-shadow: 10px 0 30px rgba(0,0,0,0.8); }
+    .sidebar a { display:block; color:#5ad1ff; margin:15px 0; text-decoration:none; cursor:pointer; }
+    .sidebar.open { left:0; }
+
+    section { position:relative; padding:50px 20px; max-width:1000px; margin:auto; animation:fadeUp 1s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+
+    h1 { font-size:42px; }
+    .typing { font-size:24px; color:#5ad1ff; min-height:30px; height:30px; display:flex; align-items:center; margin-bottom:10px; }
+    .cursor { display:inline-block; width:2px; height:24px; background:#5ad1ff; margin-left:5px; animation:blink 1s infinite; vertical-align:middle; }
+    @keyframes blink {50%{opacity:0;}}
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .card { background:#1a1a1a; border-radius:20px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,0.5); transition:0.3s; cursor:pointer; text-decoration:none; color:inherit; }
+    .card:hover { box-shadow:0 20px 40px rgba(0,0,0,0.6); }
+
+    /* YOUTUBE TOP - MÁS GRANDE */
+    .yt-top { position:absolute; top:80px; right:40px; display:flex; align-items:center; gap:15px; z-index:5; }
+    .yt-stats { display:flex; flex-direction:column; align-items:flex-end; font-size:16px; font-weight: bold; }
+    .subs { color:#ff4d4d; }
+    .views { color:#5ad1ff; }
+    .yt-avatar { width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #222; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+
+    .yt-mini { font-size:10px; display:flex; gap:8px; margin-top:8px; align-items:center; opacity:0.9; }
+    .yt-mini .material-symbols-outlined { font-size:14px; } 
+    .views-icon { color:#5ad1ff; display:flex; align-items:center; gap:3px; }
+    .likes-icon { color:#ff4d4d; display:flex; align-items:center; gap:3px; }
+
+    .isla { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0d0d0d; border:1px solid #333; border-radius:30px; padding:10px 20px; display:flex; gap:15px; z-index:999; transition:0.3s; }
+    .isla a { color:#5ad1ff; text-decoration:none; padding:6px 12px; border-radius:20px; transition:0.2s; cursor:pointer; }
+    .isla a:hover { background:#2a2a2a; }
+    .hide { transform:translate(-50%,100px); opacity:0; }
+
+    .curso-box { display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .img-placeholder { width:100%; height:120px; background:#2a2a2a; border-radius:12px; }
+    .titulo-curso { font-size:16px; }
+    .tags { font-size:12px; color:#5ad1ff; opacity:0.8; text-align:center; }
+  </style>
+</head>
+<body>
+
+<div class="isla" id="isla">
+  <a onclick="scrollToSection('top')">Inicio</a>
+  <a onclick="scrollToSection('proyectos')">Proyectos</a>
+  <a onclick="scrollToSection('cursos')">Cursos</a>
+  <a onclick="scrollToSection('disenos')">Diseños</a>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <a onclick="scrollToSection('proyectos')">Proyectos</a>
+  <a onclick="scrollToSection('cursos')">Cursos</a>
+  <a onclick="scrollToSection('disenos')">Diseños</a>
+</div>
+
+<header id="top">
+  <div class="menu" onclick="toggleMenu()">☰</div>
+  <div>ALEXANDER VALER</div>
+</header>
+
+<section>
+  <h1>Hola, soy <span id="nombre"></span><span class="cursor"></span></h1>
+  <div class="typing" id="roles"></div>
+
+  <div class="yt-top">
+    <div class="yt-stats">
+      <div id="subs" class="subs">👤 --</div>
+      <div id="viewsTotal" class="views">👁 --</div>
+    </div>
+    <img id="canal-foto" src="" class="yt-avatar" alt="Canal" />
+  </div>
+    
+  <div class="card" style="margin-top:10px;">
+    <p>
+      Tengo 17 años, soy estudiante de Ingeniería Mecatrónica en Lima y creador de contenido técnico en YouTube. Me dedico al desarrollo integral de hardware, encargándome de todo el proceso de diseño y fabricación: desde que la idea nace en la computadora hasta que el prototipo físico funciona en mi mesa.
+    </p>
+
+    <div id="extra" style="display:none; margin-top:8px; opacity:0.9;">
+      <p>No me quedo solo en la teoría; diseño y fabrico lo que necesito porque me gusta entender cómo funcionan los sistemas desde la base.</p>
+      <p>Para mis proyectos, modelo piezas y estructuras en Fusion 360, AutoCAD y Blender, ya sea para el chasis de un kart, la estructura de un drone o los núcleos de un motor.</p>
+      <p>Me meto de lleno en la mecatrónica fabricando mis propios motores eléctricos, integrando electrónica, neumática y sistemas completos.</p>
+      <p>También diseño PCBs, programo microcontroladores y construyo sistemas desde cero, incluso con relés.</p>
+      <p>Finalmente documento todo el proceso en mi canal para compartir diseños y esquemas.</p>
+    </div>
+
+    <p onclick="toggleTexto()" style="color:#5ad1ff; cursor:pointer; margin-top:6px;">ver más</p>
+  </div>
+</section>
+
+<section id="habilidades">
+  <h2>Habilidades y Software</h2>
+  <div class="grid">
+    <div class="card"><b>Diseño 3D</b><br><span style="opacity:0.8">Fusion 360, AutoCAD, Blender</span></div>
+    <div class="card"><b>Ingeniería de Motores</b><br><span style="opacity:0.8">Brushless y flujo axial</span></div>
+    <div class="card"><b>Electrónica y Control</b><br><span style="opacity:0.8">PCBs, microcontroladores</span></div>
+    <div class="card"><b>Sistemas de Potencia</b><br><span style="opacity:0.8">Neumática aplicada</span></div>
+    <div class="card"><b>Lógica de Hardware</b><br><span style="opacity:0.8">Sistemas con relés</span></div>
+    <div class="card"><b>Post-Producción</b><br><span style="opacity:0.8">Premiere Pro, After Effects</span></div>
+    <div class="card"><b>Fabricación</b><br><span style="opacity:0.8">Impresión 3D y prototipos</span></div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <h2>Proyectos</h2>
+  <div class="grid">
+    <a class="card" href="https://www.youtube.com/watch?v=bacHYcnkWa0" target="_blank">
+      <h3>Motor Brushless</h3>
+      <div class="yt-mini" id="v1">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=Md5Mhuse9Xs" target="_blank">
+      <h3>Drone Mascota</h3>
+      <div class="yt-mini" id="v2">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=zJN-9UZgRcA" target="_blank">
+      <h3>Motor Eléctrico</h3>
+      <div class="yt-mini" id="v3">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=MJAbzmbRifk" target="_blank">
+      <h3>Calculadora Relés</h3>
+      <div class="yt-mini" id="v4">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=79Dviej-Cwk" target="_blank">
+      <h3>Kart RF</h3>
+      <div class="yt-mini" id="v5">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=3DU8B_w2wRE" target="_blank">
+      <h3>Pistón Minecraft</h3>
+      <div class="yt-mini" id="v6">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=SZj3ZweQxp8" target="_blank">
+      <h3>Micro Taladro</h3>
+      <div class="yt-mini" id="v7">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+    <a class="card" href="https://www.youtube.com/watch?v=gXJSc2pwttM" target="_blank">
+      <h3>Linterna Infinita</h3>
+      <div class="yt-mini" id="v8">
+        <span class="views-icon"><span class="material-symbols-outlined">visibility</span> --</span>
+        <span class="likes-icon"><span class="material-symbols-outlined">favorite</span> --</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="cursos">
+  <h2>Cursos</h2>
+  <div class="grid">
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Diseño en Fusion 360</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Edición de Video</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Programación</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Electrónica</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Reparaciones</div></div>
+  </div>
+</section>
+
+<section id="disenos">
+  <h2>Diseños y Esquemas</h2>
+  <div class="grid">
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Motor Brushless</div><div class="tags">Diseños + Esquemas + Electrónica</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Motor Eléctrico</div><div class="tags">Diseños + Esquemas + Programación</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">CNC Casera</div><div class="tags">Diseños + Esquemas + Programación</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Kart RF</div><div class="tags">Diseños + Electrónica</div></div>
+    <div class="card curso-box"><div class="img-placeholder"></div><div class="titulo-curso">Lanzamisiles M-07</div><div class="tags">Diseños + Electrónica</div></div>
+  </div>
+</section>
+
+<script>
+const API_KEY = "AIzaSyDmKn04g7YpDVV2_pyV0JSFj-6FQtict0Q";
+const CHANNEL_ID = "UCt4QlND-EJzavCRt7235k7w";
+const VIDEOS = ["bacHYcnkWa0", "Md5Mhuse9Xs", "zJN-9UZgRcA", "MJAbzmbRifk", "79Dviej-Cwk", "3DU8B_w2wRE", "SZj3ZweQxp8", "gXJSc2pwttM"];
+
+function formatCount(num) {
+  if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
+  return num;
+}
+
+function updateYouTubeData() {
+  // Datos del canal
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${CHANNEL_ID}&key=${API_KEY}`)
+  .then(r=>r.json()).then(d=>{
+    if(d.items){
+      const ch=d.items[0];
+      document.getElementById("subs").textContent = `👤 ${formatCount(ch.statistics.subscriberCount)}`;
+      document.getElementById("viewsTotal").textContent = `👁 ${Number(ch.statistics.viewCount).toLocaleString()}`;
+      document.getElementById("canal-foto").src = ch.snippet.thumbnails.high.url;
+    }
+  });
+
+  // Datos de videos
+  fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEOS.join(",")}&key=${API_KEY}`)
+  .then(r=>r.json()).then(d=>{
+    if(d.items){
+      const statsMap = {};
+      d.items.forEach(item => statsMap[item.id] = item.statistics);
+      VIDEOS.forEach((id, i) => {
+        const stats = statsMap[id];
+        const el = document.getElementById("v" + (i + 1));
+        if (el && stats) {
+          el.innerHTML = `<span class='views-icon'><span class='material-symbols-outlined'>visibility</span> ${Number(stats.viewCount).toLocaleString()}</span>
+                          <span class='likes-icon'><span class='material-symbols-outlined'>favorite</span> ${Number(stats.likeCount).toLocaleString()}</span>`;
+        }
+      });
+    }
+  });
+}
+
+// Carga inicial y actualización cada 20 minutos (1200000 ms)
+updateYouTubeData();
+setInterval(updateYouTubeData, 1200000);
+
+const nombres=["Gabriel Carranza","Alexander Valer","MecanicaSimple"];
+const roles=["Ing. Mecatrónica","Maker","YouTuber","Diseñador Hardware","Polímata"];
+
+function typeEffect(el,words,speed=80,delay=1200){
+  let w=0,c=0,del=false;
+  function loop(){
+    let txt=words[w];
+    if(!del){el.textContent=txt.substring(0,c+1);c++;if(c===txt.length){del=true;setTimeout(loop,delay);return;}}
+    else{el.textContent=txt.substring(0,c-1);c--;if(c===0){del=false;w=(w+1)%words.length;}}
+    setTimeout(loop,del?speed/2:speed);
+  }
+  loop();
+}
+
+typeEffect(document.getElementById("nombre"),nombres, 90, 1500);
+setTimeout(()=>typeEffect(document.getElementById("roles"),roles, 70, 1200), 1000);
+
+function toggleMenu(){ document.getElementById("sidebar").classList.toggle("open"); }
+function toggleTexto(){ const e = document.getElementById("extra"); e.style.display = (e.style.display === "none") ? "block" : "none"; }
+function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); if(window.innerWidth < 768) toggleMenu(); }
+
+let lastScroll=0;
+window.addEventListener("scroll",()=>{
+  const isla=document.getElementById("isla");
+  if(window.scrollY > lastScroll){ isla.classList.add("hide"); } 
+  else { isla.classList.remove("hide"); }
+  lastScroll=window.scrollY;
+});
+</script>
+
+</body>
+</html>
